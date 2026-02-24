@@ -1,27 +1,109 @@
-In this DevOps task, you need to build and deploy a full-stack CRUD application using the MEAN stack (MongoDB, Express, Angular 15, and Node.js). The backend will be developed with Node.js and Express to provide REST APIs, connecting to a MongoDB database. The frontend will be an Angular application utilizing HTTPClient for communication.  
+# Full-Stack MEAN Application with Docker, AWS & CI/CD
 
-The application will manage a collection of tutorials, where each tutorial includes an ID, title, description, and published status. Users will be able to create, retrieve, update, and delete tutorials. Additionally, a search box will allow users to find tutorials by title.
+This project demonstrates a complete production-style deployment of a Full-Stack **MEAN (MongoDB, Express, Angular, Node.js)** application using:
 
-## Project setup
+- 🐳 Docker (Multi-stage builds)
+- 📦 Docker Compose
+- ☁️ AWS EC2 (Ubuntu)
+- 🔄 GitHub Actions CI/CD
+- 📤 Docker Hub (Image Registry)
+- 🌐 Nginx Reverse Proxy
 
-### Node.js Server
+---
 
-cd backend
+## 🏗️ Architecture Overview
 
-npm install
+GitHub (Source Code)  
+⬇  
+GitHub Actions (CI/CD Pipeline)  
+⬇  
+Docker Hub (Image Registry)  
+⬇  
+AWS EC2 (Docker Compose Deployment)  
+⬇  
+Live Application (Port 80)
 
-You can update the MongoDB credentials by modifying the `db.config.js` file located in `app/config/`.
+---
 
-Run `node server.js`
+## 📦 Tech Stack
 
-### Angular Client
+| Layer      | Technology |
+|------------|------------|
+| Frontend   | Angular 15 |
+| Backend    | Node.js + Express |
+| Database   | MongoDB |
+| Container  | Docker (Multi-stage builds) |
+| Orchestration | Docker Compose |
+| Cloud      | AWS EC2 (Ubuntu) |
+| CI/CD      | GitHub Actions |
+| Reverse Proxy | Nginx (Alpine) |
 
-cd frontend
+---
 
-npm install
+## 🐳 Docker Setup
 
-Run `ng serve --port 8081`
+### Backend
+- Node 18 Alpine
+- Environment variable based MongoDB connection
+- Optimized Dockerfile
 
-You can modify the `src/app/services/tutorial.service.ts` file to adjust how the frontend interacts with the backend.
+### Frontend
+- Multi-stage build
+- Angular production build
+- Nginx Alpine runtime image
+- Lightweight final image (~62MB)
 
-Navigate to `http://localhost:8081/`
+---
+
+## ☁️ Deployment on AWS EC2
+
+- Ubuntu Server
+- Docker installed
+- Docker Compose configured
+- Security Group allows:
+  - Port 22 (SSH)
+  - Port 80 (HTTP)
+
+Application accessible via: http://<EC2_PUBLIC_IP>
+
+
+---
+
+## 🔄 CI/CD Pipeline
+
+GitHub Actions workflow automatically:
+
+1. Builds backend & frontend Docker images
+2. Pushes images to Docker Hub
+3. SSH into EC2
+4. Pulls latest images
+5. Restarts containers
+
+Workflow file:.github/workflows/ci-cd.yml
+
+
+---
+
+## 📁 Project Structure
+mean-full-stack/
+│
+├── backend/
+│ ├── Dockerfile
+│ ├── .dockerignore
+│
+├── frontend/
+│ ├── Dockerfile
+│ ├── .dockerignore
+│
+├── docker-compose.yml
+└── .github/workflows/ci-cd.yml
+
+
+
+---
+
+## 🚀 How To Run Locally
+
+```bash
+docker-compose up --build
+Author - Naveen Parihar
