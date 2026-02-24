@@ -1,4 +1,5 @@
 # Full-Stack MEAN Application with Docker, AWS & CI/CD
+#Author - Naveen Parihar
 
 This project demonstrates a complete production-style deployment of a Full-Stack **MEAN (MongoDB, Express, Angular, Node.js)** application using:
 
@@ -106,4 +107,3 @@ mean-full-stack/
 
 ```bash
 docker-compose up --build
-Author - Naveen Parihar
